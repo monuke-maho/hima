@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "media": {
+        "storagePath": "public/images",
+        "publicPath": "/images"
+    },
+    "collections": [
+        {
+            "name": "blog",
+            "label": "ブログ記事",
+            "path": "content/blog",
+            "extension": "md",
+            "fields": [
+                { "name": "title", "type": "text", "label": "タイトル", "required": true },
+                { "name": "description", "type": "text", "label": "説明", "required": true },
+                { "name": "content", "type": "richtext", "label": "本文", "required": true },
+                { "name": "thumbnail", "type": "image", "label": "サムネイル" },
+                { "name": "publishedAt", "type": "date", "label": "公開日時" },
+                { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
+            ],
+            "layout": [["title"],["description"],["thumbnail"],["content"]],
+            "pit": {
+                "title": "title",
+                "body": "content",
+                "createdAt": "publishedAt",
+                "draft": "isDraft"
+            }
+        }
+    ]
+}

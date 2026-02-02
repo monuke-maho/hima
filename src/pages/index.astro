@@ -1,11 +1,47 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import defaultCover from "../assets/default.jpg";
+import { Image } from "astro:assets";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog')).sort(
+	(a,b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
 ---
 
 <Layout>
-	<Welcome />
+	<section class="h-screen pt-20">
+		<div
+			class="container mx-auto w-full max-w-7xl h-full flex flex-col items-center justify-center"
+		>
+			<h1 class="text-6xl font-bold">暇</h1>
+			<p class="text-lg text-gray-600 mt-6">
+				pitcmsを使用したブログ(サンプル)
+			</p>
+		</div>
+	</section>
+	<section class="py-8">
+		<div
+			class="container mx-auto w-full max-w-7xl h-full flex flex-col px-6"
+		>
+			<h2 class="text-2xl font-bold">
+				最近の投稿<br /><span class="text-sm text-gray-600"
+					>Recent Posts</span>
+			</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 w-full gap-4 mt-6">
+				{ posts.map(post => (
+					<a href={`/blog/${post.id}`} class="flex flex-col w-full overflow-hidden rounded-sm border border-gray-500/50 group">
+						<div class="w-full aspect-video overflow-hidden relative">
+							<Image src={post.data.thumbnail ? post.data.thumbnail : defaultCover} alt={post.data.title} class="object-cover object-center w-full h-full transition-all duration-300 group-hover:scale-110" />
+						</div>
+						<div class="flex flex-col p-4">
+							<p class="text-sm text-gray-600">{ post.data.publishedAt.toLocaleDateString("ja-jp") }</p>
+							<p class="text-lg font-bold">{ post.data.title }</p>
+							<p class="text-sm text-gray-600">{ post.data.description }</p>
+						</div>
+					</a>
+				)) }
+			</div>
+		</div>
+	</section>
 </Layout>
