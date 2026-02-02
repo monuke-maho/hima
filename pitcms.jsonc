@@ -1,9 +1,5 @@
 {
     "schemaVersion": 1,
-    "media": {
-        "storagePath": "public/images",
-        "publicPath": "/images"
-    },
     "collections": [
         {
             "name": "blog",

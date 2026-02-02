@@ -11,5 +11,8 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkBreaks]
+  },
+  image: {
+    domains: ["img.hima.monukedayo.cc"]
   }
 });

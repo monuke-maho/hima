@@ -20,7 +20,7 @@ const { Content } = await render(post);
     <section class="pt-20 min-h-full">
         <div class="container mx-auto w-full max-w-7xl flex flex-col px-6">
             <div class="flex flex-col w-full py-6">
-                <Image src={post.data.thumbnail || defaultCover} alt={post.data.title} class="rounded-lg aspect-21/9 object-cover object-center mb-4" />
+                <Image src={post.data.thumbnail || defaultCover} alt={post.data.title} class="rounded-lg aspect-21/9 object-cover object-center mb-4" width={1920} height={1080} />
                 <div class="flex flex-col justify-start text-left w-full">
                     <p class="text-sm text-gray-600">{ post.data.publishedAt.toLocaleDateString("ja-jp") }</p>
                     <h2 class="text-2xl font-bold">{ post.data.title }</h2>
