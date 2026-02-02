@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+html {
+    scroll-behavior: smooth;
+}
+
+@theme {
+    --default-font-family: 'Inter', 'Noto Sans JP', 'Inter Variable', 'Noto Sans JP Variable', sans-serif;
+}

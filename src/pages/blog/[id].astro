@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import defaultCover from "@/assets/default.jpg";
 import { getCollection, render } from "astro:content";
+import Toc from "@/components/Toc.astro";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 ---
 
 <Layout>
@@ -27,9 +28,12 @@ const { Content } = await render(post);
                     <p class="text-sm text-gray-600">{ post.data.description }</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full pb-8">
                 <div class="md:col-span-2 leading-relaxed prose prose-base min-w-full">
                     <Content />
+                </div>
+                <div class="top-24 hidden md:block">
+                    <Toc headings={headings} />
                 </div>
             </div>
         </div>
