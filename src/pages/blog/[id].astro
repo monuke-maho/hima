@@ -39,3 +39,24 @@ const { Content, headings } = await render(post);
         </div>
     </section>
 </Layout>
+
+<script>
+    import mediumZoom from "medium-zoom";
+
+    function initZoom() {
+        mediumZoom('.prose img:not(.no-zoom)', {
+            margin: 24,
+            background: 'rgba(255,255,255,0.9)'
+        })
+    }
+
+    initZoom()
+
+    document.addEventListener('astro:after-swap', initZoom)
+</script>
+
+<style is:global>
+    .medium-zoom-overlay, .medium-zoom-image--opened {
+        z-index: 99;
+    }
+</style>

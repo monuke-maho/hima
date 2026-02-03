@@ -56,14 +56,14 @@ export function remarkLinkCard() {
                   <div class="font-bold text-gray-800 line-clamp-2 leading-tight">${title}</div>
                   <div class="text-sm text-gray-500 line-clamp-2 md:line-clamp-1">${description}</div>
                   <div class="flex items-center gap-2 mt-auto">
-                    ${favicon ? `<img src="${favicon}" class="w-4 h-4 rounded-sm" alt="" />` : ''}
+                    ${favicon ? `<img src="${favicon}" class="w-4 h-4 rounded-sm no-zoom" alt="" />` : ''}
                     <span class="text-xs text-gray-400">${domain}</span>
                   </div>
                 </div>
 
                 ${image ? `
                 <div class="w-full md:w-1/3 aspect-video md:aspect-auto relative shrink-0 order-1 md:order-2">
-                  <Image src="${image}" class="w-full h-full object-cover" loading="lazy" decoding="async" alt="" />
+                  <Image src="${image}" class="w-full h-full object-cover no-zoom" loading="lazy" decoding="async" alt="" />
                 </div>
                 ` : ''}
               </div>
