@@ -3,6 +3,7 @@ title: テスト記事
 description: テスト記事です。
 thumbnail: https://img.hima.monukedayo.cc/uploads/1770017917014-y60ns2.jpg
 publishedAt: 2026-02-02T07:36:18.230Z
+isDraft: false
 ---
 ## テスト記事です。
 
