@@ -3,6 +3,7 @@ title: はじめまして!!
 description: はじめまして。
 thumbnail: https://img.hima.monukedayo.cc/uploads/1770015713182-78rye1.jpg
 publishedAt: 2026-02-01T13:31:57.622Z
+isDraft: false
 slug: hajimemashite
 ---
 ## はじめまして!
