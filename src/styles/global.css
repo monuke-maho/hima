@@ -6,5 +6,5 @@ html {
 }
 
 @theme {
-    --default-font-family: 'Inter', 'Noto Sans JP', 'Inter Variable', 'Noto Sans JP Variable', sans-serif;
+    --default-font-family: 'Inter', 'Inter Variable', 'Noto Sans JP', 'Noto Sans JP Variable', sans-serif;
 }
