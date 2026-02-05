@@ -3,8 +3,11 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6em;
 }
 
 @theme {
-    --default-font-family: 'Inter', 'Inter Variable', 'Noto Sans JP', 'Noto Sans JP Variable', sans-serif;
+    --default-font-family:
+        "Inter", "Inter Variable", "Noto Sans JP", "Noto Sans JP Variable",
+        sans-serif;
 }
