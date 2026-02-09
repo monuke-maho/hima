@@ -6,14 +6,23 @@ import { getCollection, render } from "astro:content";
 import Toc from "@/components/Toc.astro";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
-    return posts.map((post) => ({
-        params: { id: post.id },
-        props: { post }
-    }));
+    const allPosts = await getCollection("blog");
+    allPosts.sort(
+        (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
+    );
+
+    return allPosts.map((post, index) => {
+        const previousPost = index > 0 ? allPosts[index - 1] : undefined;
+        const nextPost =
+            index < allPosts.length - 1 ? allPosts[index + 1] : undefined;
+        return {
+            params: { id: post.id },
+            props: { post, previousPost, nextPost },
+        };
+    });
 }
 
-const { post } = Astro.props;
+const { post, previousPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
@@ -21,20 +30,58 @@ const { Content, headings } = await render(post);
     <section class="pt-20 min-h-full">
         <div class="container mx-auto w-full max-w-7xl flex flex-col px-6">
             <div class="flex flex-col w-full py-6">
-                <Image src={post.data.thumbnail || defaultCover} alt={post.data.title} class="rounded-lg aspect-21/9 object-cover object-center mb-4" width={1920} height={1080} />
+                <Image
+                    src={post.data.thumbnail || defaultCover}
+                    alt={post.data.title}
+                    class="rounded-lg aspect-21/9 object-cover object-center mb-4"
+                    width={1920}
+                    height={1080}
+                />
                 <div class="flex flex-col justify-start text-left w-full">
-                    <p class="text-sm text-gray-600">{ post.data.publishedAt.toLocaleDateString("ja-jp") }</p>
-                    <h2 class="text-2xl font-bold">{ post.data.title }</h2>
-                    <p class="text-sm text-gray-600">{ post.data.description }</p>
+                    <p class="text-sm text-gray-600">
+                        {post.data.publishedAt.toLocaleDateString("ja-jp")}
+                    </p>
+                    <h2 class="text-2xl font-bold">{post.data.title}</h2>
+                    <p class="text-sm text-gray-600">{post.data.description}</p>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full pb-8">
-                <div class="md:col-span-2 leading-relaxed prose prose-base min-w-full">
+                <div
+                    class="md:col-span-2 leading-relaxed prose prose-base min-w-full"
+                >
                     <Content />
                 </div>
                 <div class="top-24 hidden md:block">
                     <Toc headings={headings} />
                 </div>
+            </div>
+            <div
+                class="container mx-auto w-full max-w-7xl flex flex-col md:flex-row justify-between py-8 gap-4"
+            >
+                {
+                    previousPost && (
+                        <a
+                            href={`/blog/${previousPost.id}`}
+                            class="flex flex-col items-start text-left"
+                        >
+                            <span class="text-sm text-gray-600">前の記事</span>
+                            <span class="font-bold line-clamp-2">
+                                {previousPost.data.title}
+                            </span>
+                        </a>
+                    )
+                }
+                {
+                    nextPost && (
+                        <a
+                            href={`/blog/${nextPost.id}`}
+                            class="flex flex-col items-end text-right ml-auto"
+                        >
+                            <span class="text-sm text-gray-600">次の記事</span>
+                            <span class="font-bold line-clamp-2">{nextPost.data.title}</span>
+                        </a>
+                    )
+                }
             </div>
         </div>
     </section>
@@ -44,19 +91,20 @@ const { Content, headings } = await render(post);
     import mediumZoom from "medium-zoom";
 
     function initZoom() {
-        mediumZoom('.prose img:not(.no-zoom)', {
+        mediumZoom(".prose img:not(.no-zoom)", {
             margin: 24,
-            background: 'rgba(255,255,255,0.9)'
-        })
+            background: "rgba(255,255,255,0.9)",
+        });
     }
 
-    initZoom()
+    initZoom();
 
-    document.addEventListener('astro:after-swap', initZoom)
+    document.addEventListener("astro:after-swap", initZoom);
 </script>
 
 <style is:global>
-    .medium-zoom-overlay, .medium-zoom-image--opened {
+    .medium-zoom-overlay,
+    .medium-zoom-image--opened {
         z-index: 99;
     }
 </style>
