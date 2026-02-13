@@ -21,5 +21,10 @@ export default defineConfig({
     domains: ["img.hima.monukedayo.cc"]
   },
 
-  integrations: [expressiveCode()]
+  integrations: [expressiveCode({
+    styleOverrides: {
+      codeFontFamily: "'Fira Code Variable',monospace",
+      uiFontFamily: "'Inter','Inter Variable',sans-serif"
+    }
+  })]
 });

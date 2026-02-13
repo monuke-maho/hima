@@ -9,10 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/fira-code": "^5.2.7",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/noto-sans-jp": "^5.2.10",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.17.1",
+    "astro": "^5.17.2",
     "astro-expressive-code": "^0.41.6",
     "medium-zoom": "^1.1.0",
     "open-graph-scraper": "^6.11.0",

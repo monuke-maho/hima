@@ -4,10 +4,12 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 6em;
+    background: #fffefe;
 }
 
 @theme {
     --default-font-family:
         "Inter", "Inter Variable", "Noto Sans JP", "Noto Sans JP Variable",
         sans-serif;
+    --default-mono-font-family: "Fira Code Variable", monospace;
 }

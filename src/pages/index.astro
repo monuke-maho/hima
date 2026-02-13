@@ -34,11 +34,11 @@ const posts = (await getCollection('blog')).sort(
 			</h2>
 			<div class="grid grid-cols-1 md:grid-cols-3 w-full gap-4 mt-6">
 				{ posts.map(post => (
-					<a href={`/blog/${post.id}`} class="flex flex-col w-full overflow-hidden rounded-sm border border-gray-500/50 group">
+					<a href={`/blog/${post.id}`} class="flex flex-col w-full overflow-hidden rounded-3xl border border-gray-200 shadow-xl group">
 						<div class="w-full aspect-video overflow-hidden relative">
 							<Image src={post.data.thumbnail ? post.data.thumbnail : defaultCover} alt={post.data.title} class="object-cover object-center w-full h-full transition-all duration-300 group-hover:scale-110" width={1920} height={1080} />
 						</div>
-						<div class="flex flex-col p-4">
+						<div class="flex flex-col p-6">
 							<p class="text-sm text-gray-600">{ post.data.publishedAt.toLocaleDateString("ja-jp") }</p>
 							<p class="text-lg font-bold min-h-[3em] line-clamp-2">{ post.data.title }</p>
 							<p class="text-sm text-gray-600 line-clamp-1">{ post.data.description }</p>
