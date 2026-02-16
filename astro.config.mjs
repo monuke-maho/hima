@@ -12,6 +12,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  site: "https://hima.monukedayo.cc",
 
   markdown: {
     remarkPlugins: [remarkBreaks,remarkLinkCard]

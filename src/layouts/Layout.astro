@@ -5,6 +5,17 @@ import '@fontsource-variable/fira-code';
 import '../styles/global.css';
 import 'remixicon/fonts/remixicon.css';
 import Header from '../components/Header.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	cover?: string;
+}
+
+const { title, description = "暇なんです。", cover } = Astro.props;
+
+const pageTitle = title ? `${title} | 暇` : `暇`
+const ogpImg = new URL(cover || '/default.jpg', Astro.site?.origin)
 ---
 
 <!doctype html>
@@ -15,7 +26,21 @@ import Header from '../components/Header.astro';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta name="description" content={description} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogpImg} />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={pageTitle} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={ogpImg} />
 	</head>
 	<body>
 		<Header />
